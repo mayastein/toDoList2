@@ -35,14 +35,20 @@ struct ContentView: View {
             Spacer()
             List{
                 ForEach(toDos){ toDoItem in
-                    if toDoItem.isImportant{
-                        Text("‼️" + toDoItem.title)
-                    } else{
-                        Text(toDoItem.title)
-                    }
+                    ZStack{
+                        Color(red: 208 / 255, green: 232 / 255, blue: 255 / 255)
+                        HStack{
+                            if toDoItem.isImportant{
+                                Text("‼️" + toDoItem.title)
+                            } else{
+                                Text(toDoItem.title)
+                            }
+                        }.padding()
+                    }.listRowInsets(EdgeInsets()).listRowBackground(Color.clear)
+                    
                 }.onDelete(perform: deleteToDo)
             }.listStyle(.plain)
-        }
+        }.background(Color(red: 208 / 255, green: 232 / 255, blue: 255 / 255))
         if showNewTask {
             NewToDoView(showNewTask: $showNewTask, toDoItem: ToDoItem(title:"", isImportant: false))
         }
